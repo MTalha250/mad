@@ -1,0 +1,48 @@
+name: f_app
+description: "TechnoTrends - Project & Task Management System"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.5.1
+
+  # Navigation
+  go_router: ^14.2.0
+
+  # Networking
+  dio: ^5.4.3
+
+  # Storage
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.2.3
+
+  # UI
+  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
+
+  # Image Handling
+  image_picker: ^1.1.2
+
+  # Charts
+  fl_chart: ^0.68.0
+
+  # Utils
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
