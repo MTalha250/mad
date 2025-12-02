@@ -12,10 +12,7 @@ class InvoiceRepository {
     try {
       final response = await _apiClient.get(ApiEndpoints.invoices);
       final data = response.data;
-      print('Invoice data type: ${data.runtimeType}');
-      print('Invoice data: $data');
       final List<dynamic> invoices = data is List ? data : (data['invoices'] ?? []);
-      print('Invoices count: ${invoices.length}');
       return invoices.map((e) => Invoice.fromJson(e)).toList();
     } on DioException catch (e) {
       throw ApiException.fromDioError(e);

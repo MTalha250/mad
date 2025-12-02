@@ -82,11 +82,8 @@ class InvoicesNotifier extends StateNotifier<InvoicesState> {
     state = state.copyWith(isLoading: true, error: null);
     try {
       final invoices = await _repository.getInvoices();
-      print('Provider received ${invoices.length} invoices');
       state = state.copyWith(invoices: invoices, isLoading: false);
-      print('State updated, invoices in state: ${state.invoices.length}');
     } catch (e) {
-      print('Error loading invoices: $e');
       state = state.copyWith(isLoading: false, error: e.toString());
     }
   }

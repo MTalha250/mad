@@ -40,32 +40,38 @@ class ServiceDate {
   }
 
   Map<String, dynamic> toJson() {
-    // Compute serviceDate from month/year if not set
-    DateTime? computedServiceDate = serviceDate;
-    int? computedMonth = month;
-    int? computedYear = year;
+    // Compute serviceDate, month, and year - ensuring all are always set
+    DateTime computedServiceDate;
+    int computedMonth;
+    int computedYear;
 
-    if (computedServiceDate == null && computedMonth != null && computedYear != null) {
-      computedServiceDate = DateTime(computedYear, computedMonth, 1);
-    }
-
-    if (computedServiceDate != null && computedMonth == null) {
-      computedMonth = computedServiceDate.month;
-    }
-
-    if (computedServiceDate != null && computedYear == null) {
-      computedYear = computedServiceDate.year;
+    if (serviceDate != null) {
+      // Use existing serviceDate and derive month/year from it
+      computedServiceDate = serviceDate!;
+      computedMonth = month ?? serviceDate!.month;
+      computedYear = year ?? serviceDate!.year;
+    } else if (month != null && year != null) {
+      // Compute serviceDate from month/year
+      computedServiceDate = DateTime(year!, month!, 1);
+      computedMonth = month!;
+      computedYear = year!;
+    } else {
+      // Fallback to current date if nothing is set
+      final now = DateTime.now();
+      computedServiceDate = DateTime(now.year, now.month, 1);
+      computedMonth = now.month;
+      computedYear = now.year;
     }
 
     return {
-      if (computedServiceDate != null) 'serviceDate': computedServiceDate.toIso8601String(),
+      'serviceDate': computedServiceDate.toIso8601String(),
       if (actualDate != null) 'actualDate': actualDate!.toIso8601String(),
       'jcReference': jcReference,
       'invoiceRef': invoiceRef,
       'paymentStatus': paymentStatus,
       'isCompleted': isCompleted,
-      if (computedMonth != null) 'month': computedMonth,
-      if (computedYear != null) 'year': computedYear,
+      'month': computedMonth,
+      'year': computedYear,
     };
   }
 

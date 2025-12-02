@@ -1,6 +1,6 @@
 class AppConfig {
   // API Configuration
-  static const String apiBaseUrl = 'http://localhost:8080/api';
+  static const String apiBaseUrl = 'https://mad-server.vercel.app/api';
 
   // App Configuration
   static const String appName = 'TechnoTrends';
